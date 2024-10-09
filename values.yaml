@@ -1,57 +1,40 @@
-# Default values for singlestore-studio.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
 replicaCount: 1
 
 image:
   repository: chenmey85/singlestore-studio
   pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
   tag: "4.0.11"
 
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: "singlestore-studio"
 
-# Update Strategy for singlestore-studio Deployment
 rollingUpdate:
   maxSurge: 1
   maxUnavailable: 1
 
 serviceAccount:
-  # Specifies whether a service account should be created
   create: true
-  # Annotations to add to the service account
   annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
   name: ""
 
 podAnnotations: {}
 
 podSecurityContext: {}
-  # fsGroup: 2000
 
 securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
 
 service:
   type: NodePort
   port: 80
 
-# Live and Readiness probes configuration
 livenessProbe:
   initialDelaySeconds: 180
   periodSeconds: 20
   timeoutSeconds: 5
   failureThreshold: 6
   successThreshold: 1
+
 readinessProbe:
   initialDelaySeconds: 30
   periodSeconds: 10
@@ -59,9 +42,6 @@ readinessProbe:
   failureThreshold: 6
   successThreshold: 1
 
-
-ingress:
-  enabled: false
 extraContainerEnv: {}
 
 resources:
@@ -71,7 +51,6 @@ resources:
      cpu: 100m
      memory: 128Mi
 
-# Autoscaling config for singlestore-studio deployment
 autoscaling:
   enabled: false
   minReplicas: 1
@@ -79,7 +58,6 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   targetMemoryUtilizationPercentage: 80
 
-# Select certain nodes for singlestore-studio pods
 nodeSelector: {}
 
 tolerations: []
