@@ -42,6 +42,11 @@ readinessProbe:
   failureThreshold: 6
   successThreshold: 1
 
+ingress:
+  enabled: false
+  hosts: []
+  tls: []
+
 extraContainerEnv: {}
 
 resources:
